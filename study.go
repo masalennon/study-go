@@ -5,7 +5,11 @@ import (
 	"math/rand"
 	"strings"
 	"math/big"
+	"math"
+	"strconv"
+	"time"
 )
+
 
 func main() {
 	// 変数の宣言
@@ -133,7 +137,7 @@ func main() {
 
 	for newSaving < 200 {
 		switch rand.Intn(3) {
-		case 0:
+		case 0, 4, 5: //switchの候補を並べて書ける
 			newSaving += 5
 		case 1:
 			newSaving += 10
@@ -157,15 +161,208 @@ func main() {
 	seconds := new(big.Int)
 	seconds.Div(distance1, lightSpeed)
 
+	const distanceSpace = 236000000000000000
+	const lightSpeedPerSocond = 299792
+	const daysPerYear = 365
+	const lightSpeedInt = 299792
+
+	const yearsTillSpace = distanceSpace / lightSpeedInt / daysPerYear / lightSpeedPerSocond
+
+	fmt.Printf("years until the space: %v", yearsTillSpace)
+
+	grade := 'A'
+	fmt.Printf("grade: %v", grade)
+	peace := "shalom"
+	peace = "sama"
+
+	fmt.Printf("peace: %v", peace)
+
+	//1文字ずつ表示
+
+	message := "shalom"
+	for i := 0; i < 6; i++ {
+		c := message[i]
+		fmt.Printf("%c\n", c)
+	}
+
+	c := 'g'
+	c = c - 'a' + 'A'
+	fmt.Printf("%c\n", c)
+
+	alienMessage := "uv vagreangvbany fcnpr fgngvba"
+
+	for i := 0; i < len(alienMessage); i++ {
+		a := alienMessage[i]
+		if a >= 'a' && a <= 'z' { //アルファベットのみが置換の対象
+			a = a + 13 //13ずらす
+			if a > 'z' { //zを超えてしまったら26引いて戻す
+				a = a -26
+			}
+		}
+
+
+
+
+
+
+		fmt.Printf("%c", a)
+	}
+	// moji := "aiueo"
+	// moji[0] = 'e' Stringはimmutable
+	// fmt.Printf("%v ", moji)
 	
-
-
-
-
-
-
+	countdown := "only " + "10 seconds"
+	fmt.Printf("\n%v", countdown)
 	
+	v := 42
+	if v > 0 && v < math.MaxUint8 {
+		vuint := uint8(v)
+		fmt.Print(vuint)
+	}
+
+	count1 := 10
+	str := "\nlast " + strconv.Itoa(count1) + " seconds \n"
+	fmt.Printf(str)
+
+	// countdown1 := 10
+	// countdown1 = 0.5 エラー　
+
+	// countdown1 = fmt.Sprintf("%v ", countdown1)　エラー
+
+
+	answer := true
+	var oneZero int
+	if answer {
+		oneZero = 1
+	} else {
+		oneZero = 0
+	}
+	fmt.Print(oneZero)
+	fmt.Println("")
+
+	//==================================配列の中身を一つ一つ表示=====================================
+
+	words := []string{"apple", "orange", "pineapple"}
+	for _, word := range words {
+		fmt.Printf("%v ", word)
+	}
+
+
+	// =================================定義したメソッドを使用=====================================
+	var kelvin0978 kelvin = 294.0
+	celsius2 := kelvinToCelsius(kelvin0978)
+	fmt.Print(kelvin0978, "K is ", celsius2, "C.")
+
+	ff := celsiusToFahrenheit(kelvinToCelsius(kelvin(0)))
+	fmt.Print("k = ", ff)
+
+	//===================================新しい型を定義============================================
+	type celsius1 float64
+	const degrees = 20
+	var temperature celsius1 = degrees
+	temperature += 10
+
+	var warmUp float64 = 10
+	// temperature += warmUp 型の不一致でエラーになる
+
+	temperature += celsius1(warmUp) //型を変換する必要がある
+
+	var cel celsius1 = 20
+	var fah farenheit = 20
+	// if cel == fah { // invalid operation　タイプの不一致　不正な演算
+
+	// cel += fah // invalid oepration
+	fmt.Print("\n", cel, fah)
+
+
+
+	var kel kelvin = 294.0
+	var kToC celsius
+
+	kToC = kelvinToCelsius(kel)
+
+	kToC = kel.celsius()
+
+	fmt.Printf("\nkToC: %v\n", kToC)
+
+
+	//=====================ファーストクラス関数==========================
+
+	sensor := fakeSensor
+	fmt.Println(sensor())
 	
-	
-	
+	sensor = realSensor
+	fmt.Println(sensor())
+
+	// ==========================無名関数==============================
+
+	f := func(message string) {
+		fmt.Println(message)
+	}
+	f("this is an anonymous method.")
+
+	func() {
+		fmt.Println("Functions anonymous")
+	}()
+
+
+}
+
+type farenheit float64
+type celsius float64
+type kelvin float64
+
+func kelvinToCelsius(k kelvin) celsius {
+	c := k - 273.15
+	return celsius(c)
+}
+
+//カスタムの型を使う変数
+func celsiusToFahrenheit(c celsius) farenheit {
+	f := farenheit(c * 9.0 / 5.0) + 32.0 //型変換が必要
+	return f
+}
+
+//レシーバを持ったメソッド
+
+func (c celsius) kelvin() kelvin {
+	return kelvin(c + 273.15)
+}
+func (k kelvin) celsius() celsius {
+	 return celsius(k - 273.15)
+}
+func (f farenheit) celsius() celsius {
+	return celsius((f - 32.0) * 5.0 / 9.0)
+}
+func (c celsius) farenheit() farenheit {
+	return farenheit((c * 9.0 / 5.0) + 32.0)
+} 
+func (f farenheit) kelvin() kelvin {
+	return f.celsius().kelvin()
+}
+func (k kelvin) farenheit() farenheit {
+	return k.celsius().farenheit()
+}
+
+
+func realSensor() kelvin {
+	return 0
+}
+
+func fakeSensor() kelvin {
+	return kelvin(rand.Intn(151) + 150)
+}
+
+func measureTemperature(samples int, sensor func() kelvin) {
+	for i := 0; i < samples; i++ {
+		k := sensor()
+		fmt.Printf("%vo K\n", k)
+		time.Sleep(time.Second)
+	}
+}
+
+type getRowFn func(rows int) (string, string)
+
+func drawTable(rows int, getRow getRowFn) {
+
 }
