@@ -19,7 +19,8 @@ func NewLanguage(name string, langType string) *Language {
 }
 
 func main() {
-     l := NewLanguage("Go", "Static")
+	 l := NewLanguage("Go", "Static")
+	 
      fmt.Println("名前" + l.Name)
 	 fmt.Println("言語" + l.LangType)
 	 
