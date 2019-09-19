@@ -14,13 +14,15 @@ func NewLanguage(name string, langType string) *Language {
      // 以下、構造体の各フィールドを引数で受け取った値に設定
      l.Name = name
      l.LangType = langType
-     // 構造体のインスタンスを返す
+	 // 構造体のインスタンスを返す
+	 fmt.Println(l)	 
      return l
 }
 
 func main() {
 	 l := NewLanguage("Go", "Static")
-	 
+	 fmt.Println(l)
+	 fmt.Println(*l)
      fmt.Println("名前" + l.Name)
 	 fmt.Println("言語" + l.LangType)
 	 
