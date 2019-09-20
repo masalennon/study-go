@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 //問題1
-// 配列の各要素に引数で受け取った言葉をつける
+// 配列の各要素の頭に引数で受け取った文字列をついて一つ一つの要素を出力する
 //問題2
 // レシーバを持つメソッドを定義して、使用する
 //問題3
@@ -18,7 +17,11 @@ import (
 // 簡単なインターフェース変数を定義して使用するプログラム(答えはlesson24)
 //問題7
 //定義したインターフェース型を引数にして使用するメソッド(答えはlesson24-2)
-
+//問題8
+//構造体を宣言して、その構造体に値を追加
+//問題9
+//構造体へのポインタをレシーバに持つメソッドを定義して、そのメソッドから構造体の値を変更する。答えはlesson26-2
+// 分からなかったところ：構造体の宣言の文法があやふや、2019/09/20　
 
 
 //配列要素
@@ -28,6 +31,18 @@ import (
 
 //配列の各要素に引数で受け取った言葉をつけるプログラム
 func main() {
-	simpleSet := make(map[string]bool, 4)
-	
+	// simpleSet := make(map[string]bool, 4)
+	imagine := &song {
+		author: "John Lennon",
+		year: 1975,
+	}
+	imagine.changeSong()
+	fmt.Println(imagine)
+}
+type song struct{
+	author string
+	year int
+}
+func (s *song) changeSong() {
+	s.year++
 }
