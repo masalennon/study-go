@@ -7,7 +7,7 @@ type Language struct {
 }
 
 // コンストラクタ
-// 戻り値として返すのは、構造体のポイントであることに注意
+// 戻り値として返すのは、構造体のポイントであることに注意 確かQiitaの記事から
 func NewLanguage(name string, langType string) *Language {
      // コンストラクタの関数内で、構造体をnew
      l := new(Language)
