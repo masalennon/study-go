@@ -7,7 +7,14 @@ import (
 
 func main() {
 	c := make(chan int)
-	a := make(map[string]bool)
+	// a := make(map[string]bool)
+	type aaa [5]int
+	var ai [5]int
+	fmt.Printf("%T\n", "寿司🍣Beer🍺")
+	fmt.Printf("%T", ai)
+	var r rune
+	r = 'H'
+	fmt.Print("r = ", r)
 
 	for i := 0; i < 5; i++ {
 		go sleepyGopher(i, c)
