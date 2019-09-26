@@ -7,23 +7,32 @@ import (
 
 func main() {
   myCar := &prius{name: "マイカー", speed: 0}
+  fmt.Println(myCar)
   hisCar := &lexus{name: "彼の車", speed: 0}
+
   var protoA prius
   protoA.name = "proto A"
   protoA.speed = 10
+
   fmt.Printf("%+v", protoA)
+
   var c car = myCar //interface変数に入れることで、インターフェイスを満たしていることが確認できる。
   fmt.Println(c.run(30))
   c.stop()
 
-  
-priuses := []prius{
-  {name: "Prius A", speed: 10},
-  {name: "Prius B", speed: 10},
-}
-fmt.Printf("\n%+v \n", priuses)
+  var sample struct{
+    name string
+    age int
+  }
 
+  fmt.Println(sample)
 
+    
+  priuses := []prius{
+    {name: "Prius A", speed: 10},
+    {name: "Prius B", speed: 10},
+  }
+  fmt.Printf("\n%+v \n", priuses)
 
   var h car = hisCar
   fmt.Println(h.run(40))
