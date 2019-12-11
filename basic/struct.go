@@ -20,7 +20,7 @@ func main() {
 		person:   studentA,
 	}
 	ichiro := newJapanese("Ichiro", 33)
-	fmt.Println(ichiro)
+	fmt.Println(*ichiro)
 
 	fmt.Println(taro)
 	fmt.Println(taro.person.name)
@@ -36,8 +36,10 @@ func main() {
 	fmt.Println(tem)
 }
 
-func newJapanese(name string, age int) person {
-	return person{name, age}
+func newJapanese(name string, age int) *person {
+	return &person{
+		name: name, 
+		age: age}
 }
 
 func newTemperature(high, low float64) temperature {

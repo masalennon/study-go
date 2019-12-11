@@ -33,6 +33,7 @@ func main() {
     {name: "Prius B", speed: 10},
   }
   fmt.Printf("\n%+v \n", priuses)
+  
 
   var h car = hisCar
   fmt.Println(h.run(40))
